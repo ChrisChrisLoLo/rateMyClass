@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Rate My Course</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		{{> header}}
+		<div class="container">
+			<div class="row">
+				<div class="col-2"></div>
+				<div class="col-8">
+					<h2>Rate a Course</h2>
+					<form action="" <!--class="form-inline"-->
+					    <div class="form-group">
+					    	<label for="course"></label>
+					        <input id="courseDep" type="text" class="form-control" placeholder="Course Department Name" required>
+					    </div>
+					    <div class="form-group">    
+					         <input id="courseNum" type="text" class="form-control" placeholder="Course Number" required>   
+					    </div>
+					    <!--TODO: make number system use stars and not literal ass-->
+					    <!--TODO: also make ratings out of 10, and give a description of what each number means-->
+					    <div class="form-group">
+					    	<label for="difficulty">How Difficult Was This Course?</label>
+					        <select class="form-control" id="difficulty">
+					        	<option selected hidden>Pick a value</option>
+								<option>5 - Easy</option>
+								<option>4 - Somewhat Easy</option>
+								<option>3 - Okay</option>
+								<option>2 - Pretty Hard</option>
+								<option>1 - OH GOD IM BLEEDING</option>
+							</select>
+					    </div>
+					    <div class="form-group">
+					    	<label for="workload">How Nice Was The Workload?</label>
+					        <select class="form-control" id="workload">
+					        	<option selected hidden>Pick a value</option>
+								<option>5 - Didn't have to do anything, really</option>
+								<option>4 - A bit of work here and there</option>
+								<option>3 - A fair amount of work</option>
+								<option>2 - Eats up a fair amount of my schedule</option>
+								<option>1 - Reason why I don't get enough sleep</option>
+							</select>
+					    </div>
+					    <div class="form-group">
+					    	<label for="practicality">How useful was the material learned in this course?</label>
+					        <select class="form-control" id="practicality">
+								<option selected hidden>Pick a value</option>
+								<option>5 - I get why I learned it, and I'm glad I did</option>
+								<option>4 - Most things seem fairly practical</option>
+								<option>3 - Some things seem useful, others less so</option>
+								<option>2 - Can't really apply the material to my field</option>
+								<option>1 - Aside from credit/GPA, completely useless</option>
+							</select>
+					    </div>
+					    <div class="form-group">
+					    	<label for="enjoyment">How much did you enjoy the course?</label>
+					        <select class="form-control" id="practicality">
+					        	<option selected hidden>Pick a value</option>
+								<option>5 - Had quite a bit of fun in this course</option>
+								<option>4 - Was interested in some of the topics learned</option>
+								<option>3 - I got through the course, but didn't like it that much</option>
+								<option>2 - Found most things pretty boring</option>
+								<option>1 - Hated every minute of it</option>
+							</select>
+					    </div>
+					    <button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+				<div class="col-2"></div>
+			</div>
+		</div>
+		{{> footer}}
+	</body>
+</html>
