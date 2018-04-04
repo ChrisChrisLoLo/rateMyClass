@@ -7,32 +7,49 @@ var app = express();
 
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-//mongoose.connect('mogodb://localhost:27017/appData');
-
-
+mongoose.connect('mongodb://localhost:27017/appData');
 
 var courseRating = mongoose.model('courseRating',{
 	//Possiblities: have prereqs/coreqs, postreqs
 	courseDep:{
 		type: String
+		required: true
+		minlength:1
+		maxlength:5
+		trim: true
 	},
 	courseNum:{
-		type: String
-	},
-	description:{
-		type: String
+		type: Number
+		required: true
+		minlength:1
+		maxlength:5
+		trim: true
 	},
 	difficulty:{
 		type: Number
+		required: true
 	},
 	workload:{
 		type: Number
+		required: true
 	},
 	practicality:{
 		type: Number
+		required: true
 	},
 	enjoyment:{
 		type: Number
+		required: true
+	},
+	comments:{
+		type: String
+		trim: true
+		default:null
+	},
+	description:{
+		type: String
+		trim: true
+		default:null
 	},
 });
 
@@ -55,7 +72,7 @@ app.get('/',function(req,res){
 app.get('/rate',function(req,res){
 	res.render('rate.hbs',{
 		name: "Penelope",
-		errors: 1
+		errors: null
 	});
 });
 
@@ -73,7 +90,7 @@ app.post('/submit_rating',(req,res)=>{
 	req.checkBody('practicality','Stop messing with the HTML, asshole').isLength({min:1,max:1}).isInt({gt:0,lt:6}).toInt();
 	req.checkBody('enjoyment','Stop messing with the HTML, asshole').isLength({min:1,max:1}).isInt({gt:0,lt:6}).toInt();
 
-	req.checkBody('comments','Comments must be under 140 characters').isLength({max:140});
+	req.checkBody('comments','Comments must be under 140 characters').isLength({max:140}).trim();
 	var errors = req.validationErrors();
 	console.log(req.body)
 	if (errors) {
@@ -87,6 +104,9 @@ app.post('/submit_rating',(req,res)=>{
 //Todo: bar anyone from this http if they didn't JUST submit a form
 app.get('/submit_rating/success',(req,res)=>{
 	res.render('rateSuccess.hbs');
+});
+app.get('/viewCourse',(req,res)=>{
+	res.render('viewCourse.hbs');
 });
 //function is a callback, but this function can do more if desired.
 app.listen(3000,function(){
