@@ -5,6 +5,8 @@ var validator = require('express-validator');
 var bodyParser = require('body-parser');
 var app = express();
 
+
+
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/appData');
@@ -45,10 +47,6 @@ var courseRating = mongoose.model('courseRating',{
 		type: Number,
 		default:null
 	},
-	voteCount:{
-		type: Number,
-		required: true
-	}
 	comments:{
 		type: String,
 		trim: true,
@@ -119,17 +117,30 @@ app.post('/submit_rating',(req,res)=>{
 		},(e) => {
 			console.log("Unable to store form: ",e);
 		});
-		
 	}
 });
 //Todo: bar anyone from this http if they didn't JUST submit a form
 app.get('/submit_rating/success',(req,res)=>{
 	res.render('rateSuccess.hbs');
 });
+
 app.get('/viewCourse',(req,res)=>{
 	res.render('viewCourse.hbs');
+});
+app.post('/viewCourse',(req,res)=>{
+	// req.checkBody('courseDep',"Course Department must be 3-5 characters long").isLength({min:3,max:5})
+	// .isAlpha().withMessage("Course Department must only contain letters")
+	// .trim();
+	// var errors = req.validationErrors();
+	// console.log(req.body)
+	//if (errors) {
+	res.redirect('/viewCourse/'+req.body.courseDep+'/'+req.body.courseNum+'/')
+});
+//TODO: GET CUSTOM ROUTE and process data
+app.get('/viewCourse/:courseDep/:courseNum',(req,res)=>{
+	res.render('rateSuccess.hbs');
 });
 //function is a callback, but this function can do more if desired.
 app.listen(3000,function(){
 	console.log("Server Started on Port 3000...");
-})
+});

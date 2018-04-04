@@ -11,7 +11,24 @@
 	<body>
 		{{> header}}
 		<div class="container">
+			<div class="row">
+				<div class="col">
+					Search for a Class
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<form action="/viewCourse" class="form-inline" method="post">
+							<!--<label for="courseDep">Course Department </label>-->
+							<input name="courseDep" type="text" class="form-control" placeholder="Course Dep." required>
 
+							<!--<label for="courseNum">Course Number </label>-->
+							<input name="courseNum" type="text" class="form-control" placeholder="Course Number">
+
+					    <button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				</div>
+			</div>
 		</div>
 		{{> footer}}
 	</body>
