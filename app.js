@@ -106,13 +106,6 @@ app.post('/submit_rating',(req,res)=>{
 		return;
 	}
 	else{
-		######################################################################3
-		courseRating.findOne({'courseDep':req.body.courseDep.toUpperCase(),
-							'courseRating':parseInt(req.body.courseRating)
-							}).then((course,e)=>{
-								course.difficulty = 
-							});
-
 		var formRating = new courseRating({
 			courseDep:req.body.courseDep.toUpperCase(),
 			courseNum:parseInt(req.body.courseNum),
