@@ -12,43 +12,51 @@ mongoose.connect('mongodb://localhost:27017/appData');
 var courseRating = mongoose.model('courseRating',{
 	//Possiblities: have prereqs/coreqs, postreqs
 	courseDep:{
-		type: String
-		required: true
-		minlength:1
-		maxlength:5
+		type: String,
+		required: true,
+		minlength:1,
+		maxlength:5,
 		trim: true
 	},
 	courseNum:{
-		type: Number
-		required: true
-		minlength:1
-		maxlength:5
+		type: Number,
+		required: true,
+		minlength:1,
+		maxlength:5,
 		trim: true
 	},
 	difficulty:{
-		type: Number
+		type: Number,
 		required: true
 	},
 	workload:{
-		type: Number
+		type: Number,
 		required: true
 	},
 	practicality:{
-		type: Number
+		type: Number,
 		required: true
 	},
 	enjoyment:{
-		type: Number
+		type: Number,
 		required: true
 	},
+	overall:{
+		type: Number,
+		default:null
+	},
+	voteCount:{
+		type: Number,
+		required: true
+	}
 	comments:{
-		type: String
-		trim: true
+		type: String,
+		trim: true,
 		default:null
 	},
 	description:{
-		type: String
-		trim: true
+		type: String,
+		trim: true,
 		default:null
 	},
 });
@@ -98,7 +106,27 @@ app.post('/submit_rating',(req,res)=>{
 		return;
 	}
 	else{
-		res.redirect('success');
+		######################################################################3
+		courseRating.findOne({'courseDep':req.body.courseDep.toUpperCase(),
+							'courseRating':parseInt(req.body.courseRating)
+							}).then((course,e)=>{
+								course.difficulty = 
+							});
+
+		var formRating = new courseRating({
+			courseDep:req.body.courseDep.toUpperCase(),
+			courseNum:parseInt(req.body.courseNum),
+			difficulty:parseInt(req.body.difficulty),
+			workload:parseInt(req.body.workload),
+			practicality:parseInt(req.body.practicality),
+			enjoyment:parseInt(req.body.enjoyment),
+			comments:req.body.comments
+		});
+		formRating.save().then(()=>{res.redirect('success');
+		},(e) => {
+			console.log("Unable to store form: ",e);
+		});
+		
 	}
 });
 //Todo: bar anyone from this http if they didn't JUST submit a form
