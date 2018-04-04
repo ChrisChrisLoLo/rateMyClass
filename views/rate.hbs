@@ -15,21 +15,34 @@
 				<div class="col-2"></div>
 				<div class="col-8">
 					<h2>Rate a Course</h2>
-					<form action="/submit_rating/" method="post">
+					{{#if errors}}
+						<div style="color:red">
+							<ul>
+								{{#each errors}}
+									<li>{{this.msg}}</li>
+								{{/each}}
+							</ul>
+						</div>
+					{{/if}}
+					<form action="/submit_rating/" method="post" enctype="application/json">
 						<!--class="form-inline"-->
 					    <div class="form-group">
-					    	<label for="course"></label>
-					        <input id="courseDep" type="text" class="form-control" placeholder="Course Department Name (Ex. MATH, ENGL...)" required>
+					    	<label for="courseDep">Course Department</label>
+					        <input name="courseDep" type="text" class="form-control" placeholder="Course Department Name (Ex. MATH, ENGL, CMPUT, ...)" required>
 					    </div>
 					    <div class="form-group">    
-					         <input id="courseNum" type="text" class="form-control" placeholder="Course Number" required>   
+					    	<label for="courseNum">Course Number</label>
+					         <input name="courseNum" type="text" class="form-control" placeholder="Course Number" required>   
 					    </div>
 					    <!--TODO: make number system use stars and not literal ass-->
 					    <!--TODO: also make ratings out of 10, and give a description of what each number means-->
+					    <!--TODO: have an actual list of courses to check if course is valid-->
+					    <!--TODO: have the error message be associated to each input-->
+					    <!--MUST USE NAME TAG FOR FORM TO BE READ-->
 					    <div class="form-group">
 					    	<label for="difficulty">How Difficult Was This Course?</label>
-					        <select class="form-control" id="difficulty">
-					        	<option selected hidden>Pick a value</option>
+					        <select class="form-control" name="difficulty" required>
+					        	<option selected hidden value="">Pick a value</option>
 								<option value=5>5 - Easy</option>
 								<option value=4>4 - Somewhat Easy</option>
 								<option value=3>3 - Okay</option>
@@ -39,8 +52,8 @@
 					    </div>
 					    <div class="form-group">
 					    	<label for="workload">How Nice Was The Workload?</label>
-					        <select class="form-control" id="workload">
-					        	<option selected hidden>Pick a value</option>
+					        <select class="form-control" name="workload" required>
+					        	<option selected hidden value="">Pick a value</option>
 								<option value=5>5 - Didn't have to do anything, really</option>
 								<option value=4>4 - A bit of work here and there</option>
 								<option value=3>3 - A fair amount of work</option>
@@ -50,8 +63,8 @@
 					    </div>
 					    <div class="form-group">
 					    	<label for="practicality">How useful was the material learned in this course?</label>
-					        <select class="form-control" id="practicality">
-								<option selected hidden value=''>Pick a value</option>
+					        <select class="form-control" name="practicality" required>
+								<option selected hidden value="">Pick a value</option>
 								<option value=5>5 - I get why I learned it, and I'm glad I did</option>
 								<option value=4>4 - Most things seem fairly practical</option>
 								<option value=3>3 - Some things seem useful, others less so</option>
@@ -61,14 +74,18 @@
 					    </div>
 					    <div class="form-group">
 					    	<label for="enjoyment">How much did you enjoy the course?</label>
-					        <select class="form-control" id="practicality" required>
-					        	<option selected hidden>Pick a value</option>
+					        <select class="form-control" name="enjoyment" required>
+					        	<option selected hidden value="">Pick a value</option>
 								<option value=5>5 - Had quite a bit of fun in this course</option>
 								<option value=4>4 - Was interested in some of the topics learned</option>
 								<option value=3>3 - I got through the course, but didn't like it that much</option>
 								<option value=2>2 - Found most things pretty boring</option>
 								<option value=1>1 - Hated every minute of it</option>
 							</select>
+					    </div>
+					    <div class="form-group">    
+					    	<label for="comments">Any additional comments? (Optional)</label>
+					        <textarea name="comments" type="text" class="form-control" placeholder="Comment here. Maximum of 140 characters." rows="3"></textarea>   
 					    </div>
 					    <button type="submit" class="btn btn-primary">Submit</button>
 					</form>
