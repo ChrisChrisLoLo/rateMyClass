@@ -10,25 +10,29 @@
 	</head>
 	<body>
 		{{> header}}
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-3">
-				</div>
-				<div class="col-6" >
-					<h1>Rate My Course</h1>
-					<a href="/rateCourse" class="btn btn-primary" >Rate a Course</a>
-					<a href="/viewCourse" class="btn btn-primary" >Find a Course</a>
-				</div>
-				<div class="col-3">
-				</div>
-			</div>
+		<div class="container">
 			<div class="row">
 				<div class="col">
-					
+					<h2>Seaching entries for {{courseDep}} {{courseNum}}:</h2>
+					{{#if entries}}
+						{{#each entries}}
+							<div class="entry" style="background-color: LightSlateGrey ">
+								<ul>
+									<li>Overall: {{overall}}/5</li>
+									<li>Difficulty: {{difficulty}}/5</li>
+									<li>Workload: {{workload}}/5</li>
+									<li>Practicality: {{practicality}}/5</li>
+									<li>Enjoyment: {{enjoyment}}/5</li>
+								</ul>
+								<!--<p>Comments: {{comments}} #must have if comments block-->
+							</div>
+						{{/each}}
+					{{else}}
+						<h3>Can't find any courses of this type!</h3>
+					{{/if}}
 				</div>
 			</div>
 		</div>
-		
 		{{> footer}}
 	</body>
 </html>
