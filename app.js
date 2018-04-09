@@ -5,11 +5,12 @@ var validator = require('express-validator');
 var bodyParser = require('body-parser');
 var app = express();
 
+const port = process.env.PORT || 3000;
 
 
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/appData');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/appData');
 
 var CourseRating = mongoose.model('CourseRating',{
 	//Possiblities: have prereqs/coreqs, postreqs
@@ -154,6 +155,6 @@ app.get('/viewCourse/:courseDep/:courseNum',(req,res)=>{
 });
 
 //function is a callback, but this function can do more if desired.
-app.listen(3000,function(){
-	console.log("Server Started on Port 3000...");
+app.listen(port,function(){
+	console.log("Server Started on Port "+port+"...");
 });
